@@ -15,15 +15,18 @@ User requested to update their personal portfolio website based on their new res
 ## Core Requirements (Static)
 1. Modern, professional portfolio design
 2. Responsive navigation with smooth scrolling
-3. Hero section with name, title, and CTAs
+3. Hero section with name, title, profile image, and CTAs
 4. About section with professional summary
 5. Work Experience with current role at Conin Technologies
-6. Skills categorized by domain (Frontend, Backend, AI/LLM, etc.)
+6. Skills categorized by domain (Frontend, Backend, AI/LLM, AI Agents, etc.)
 7. Featured projects (Care AI, CRM)
-8. Contact section with email, phone, LinkedIn, GitHub
+8. Certifications section
+9. Contact section with email, phone, LinkedIn, GitHub
+10. Downloadable resume
 
 ## What's Been Implemented
-**Date: March 31, 2026**
+
+### Initial Implementation - March 31, 2026
 - [x] Complete portfolio redesign with modern dark theme
 - [x] Updated personal info: Subash Sekar - Python Full Stack Developer
 - [x] New contact: subashsekar116@gmail.com, +91 8438420257
@@ -34,7 +37,21 @@ User requested to update their personal portfolio website based on their new res
 - [x] Responsive design with mobile menu
 - [x] Smooth scroll navigation
 - [x] Social links (GitHub, LinkedIn, Email)
-- [x] All tests passed (100% success rate)
+
+### Enhancement Update - March 31, 2026
+- [x] Profile image added to hero section with gradient border
+- [x] Download Resume button (hero + contact sections)
+- [x] Resume PDF available for download
+- [x] Certifications section with AWS credentials:
+  - AWS Machine Learning Specialty (Udemy)
+  - AWS Cloud Practitioner (Udemy)
+- [x] New skill category: AI Agents
+  - LangChain Agents
+  - Agentic RAG
+  - Function Calling
+  - Single-Agent Systems
+- [x] Streamlit added to Frontend Development skills
+- [x] Navigation updated to include Certifications
 
 ## Tech Stack
 - React.js (Frontend)
@@ -46,11 +63,13 @@ User requested to update their personal portfolio website based on their new res
 ### P0 (Critical) - COMPLETED
 - [x] Update all personal information from resume
 - [x] Replace Xortican with Conin Technologies
+- [x] Add profile image
+- [x] Add downloadable resume
+- [x] Add certifications
 
 ### P1 (High Priority)
-- [ ] Add downloadable resume PDF
-- [ ] Add profile image
 - [ ] SEO optimization (meta tags, Open Graph)
+- [ ] Add more projects as portfolio grows
 
 ### P2 (Medium Priority)
 - [ ] Add contact form with email integration
@@ -64,6 +83,6 @@ User requested to update their personal portfolio website based on their new res
 - [ ] Analytics integration
 
 ## Next Tasks
-1. User can add profile photo
-2. Add downloadable resume button
-3. Consider adding a contact form
+1. Consider adding a contact form for direct inquiries
+2. Add more certifications as earned
+3. Update projects section with new work
