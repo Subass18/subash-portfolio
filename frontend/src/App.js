@@ -4,12 +4,12 @@ import "@/App.css";
 // Portfolio Data based on Resume
 const portfolioData = {
   name: "Subash Sekar",
-  title: "Python Full Stack Developer",
+  title: "Python Full Stack Developer | AI/LLM Developer",
   subtitle: "Django | FastAPI | REST APIs | AI/LLM Integration",
   email: "subashsekar116@gmail.com",
   phone: "+91 8438420257",
   location: "Chennai, India",
-  linkedin: "https://linkedin.com/in/subash-sekar-1609",
+  linkedin: "https://www.linkedin.com/in/subash-sekar-49509a21b/",
   github: "https://github.com/Subashsekar",
   profileImage: "/profile.jpg",
   resumeUrl: "/SubashSekar_Resume.pdf",
@@ -45,13 +45,11 @@ const portfolioData = {
   certifications: [
     {
       name: "AWS Machine Learning Specialty",
-      provider: "Udemy",
-      icon: "aws"
+      provider: "Udemy"
     },
     {
       name: "AWS Cloud Practitioner",
-      provider: "Udemy",
-      icon: "aws"
+      provider: "Udemy"
     }
   ],
   
@@ -61,6 +59,7 @@ const portfolioData = {
     "Backend Development": ["Django", "Django REST Framework", "FastAPI", "REST APIs", "Microservices"],
     "AI / LLM Integration": ["OpenAI", "Gemini", "Claude", "Llama", "RAG", "LlamaIndex", "Qdrant", "Prompt Engineering"],
     "AI Agents": ["LangChain Agents", "Agentic RAG", "Function Calling", "Single-Agent Systems"],
+    "Cloud Services": ["AWS", "GCP", "Pub/Sub", "SageMaker"],
     "Databases": ["PostgreSQL", "MySQL", "MongoDB", "Supabase"],
     "Tools & DevOps": ["Docker", "Docker Compose", "Git", "GitHub", "Postman"],
     "Performance & System Design": ["Redis", "Celery", "Caching", "Task Queues", "API Gateway"],
@@ -95,10 +94,31 @@ const portfolioData = {
   ]
 };
 
-// Navigation Component
-const Navigation = ({ activeSection, setActiveSection }) => {
+// Theme Toggle Component
+const ThemeToggle = ({ isDark, toggleTheme }) => {
+  return (
+    <button 
+      onClick={toggleTheme} 
+      className="theme-toggle" 
+      data-testid="theme-toggle"
+      aria-label="Toggle theme"
+    >
+      {isDark ? (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      ) : (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      )}
+    </button>
+  );
+};
+
+// Navigation Component - Profile image in nav, always horizontal
+const Navigation = ({ activeSection, setActiveSection, isDark, toggleTheme }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -112,67 +132,57 @@ const Navigation = ({ activeSection, setActiveSection }) => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'nav-scrolled' : 'nav-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
-          <a href="#home" className="text-2xl font-bold text-gradient" data-testid="nav-logo">SS</a>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item}`}
-                data-testid={`nav-${item}`}
-                className={`nav-link capitalize ${activeSection === item ? 'active' : ''}`}
-                onClick={() => setActiveSection(item)}
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-white p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            data-testid="mobile-menu-toggle"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+      <div className="nav-container">
+        {/* Profile Image as Logo - clicks to About */}
+        <a href="#about" className="nav-profile-link" data-testid="nav-profile">
+          <img 
+            src={portfolioData.profileImage} 
+            alt={portfolioData.name}
+            className="nav-profile-img"
+          />
+        </a>
+        
+        {/* Always Horizontal Navigation */}
+        <div className="nav-links">
+          {navItems.map((item) => (
+            <a
+              key={item}
+              href={`#${item}`}
+              data-testid={`nav-${item}`}
+              className={`nav-link capitalize ${activeSection === item ? 'active' : ''}`}
+              onClick={() => setActiveSection(item)}
+            >
+              {item}
+            </a>
+          ))}
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-white/10">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item}`}
-                data-testid={`mobile-nav-${item}`}
-                className="block py-3 text-white/80 hover:text-white capitalize"
-                onClick={() => {
-                  setActiveSection(item);
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-        )}
+        <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
       </div>
     </nav>
   );
 };
 
-// Hero Section with Profile Image
+// Hero Section - No profile image here since it's in nav
 const HeroSection = () => {
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(portfolioData.resumeUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'SubashSekar_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      // Fallback: open in new tab
+      window.open(portfolioData.resumeUrl, '_blank');
+    }
+  };
+
   return (
     <section id="home" className="hero-section" data-testid="hero-section">
       <div className="hero-background">
@@ -182,36 +192,25 @@ const HeroSection = () => {
       
       <div className="hero-content">
         <div className="hero-text-container">
-          {/* Profile Image */}
-          <div className="hero-profile-image animate-fade-in">
-            <img 
-              src={portfolioData.profileImage} 
-              alt={portfolioData.name}
-              className="profile-img"
-              data-testid="profile-image"
-            />
-          </div>
+          <p className="hero-greeting animate-fade-in">Hello, I'm</p>
+          <h1 className="hero-name animate-fade-in-delay-1">{portfolioData.name}</h1>
+          <h2 className="hero-title animate-fade-in-delay-2">{portfolioData.title}</h2>
+          <p className="hero-subtitle animate-fade-in-delay-3">{portfolioData.subtitle}</p>
           
-          <p className="hero-greeting animate-fade-in-delay-1">Hello, I'm</p>
-          <h1 className="hero-name animate-fade-in-delay-2">{portfolioData.name}</h1>
-          <h2 className="hero-title animate-fade-in-delay-3">{portfolioData.title}</h2>
-          <p className="hero-subtitle animate-fade-in-delay-4">{portfolioData.subtitle}</p>
-          
-          <div className="hero-cta animate-fade-in-delay-5">
+          <div className="hero-cta animate-fade-in-delay-4">
             <a href="#contact" className="btn-primary" data-testid="hero-contact-btn">
               Get In Touch
             </a>
-            <a 
-              href={portfolioData.resumeUrl} 
-              download="SubashSekar_Resume.pdf"
+            <button 
+              onClick={handleDownload}
               className="btn-secondary btn-download" 
               data-testid="download-resume-btn"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
               Download Resume
-            </a>
+            </button>
           </div>
           
           <div className="hero-social animate-fade-in-delay-5">
@@ -273,7 +272,7 @@ const AboutSection = () => {
 // Experience Section
 const ExperienceSection = () => {
   return (
-    <section id="experience" className="section-container section-dark" data-testid="experience-section">
+    <section id="experience" className="section-container section-alt" data-testid="experience-section">
       <div className="max-w-6xl mx-auto">
         <h2 className="section-title">Work Experience</h2>
         <div className="experience-timeline">
@@ -337,7 +336,7 @@ const SkillsSection = () => {
 // Projects Section
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="section-container section-dark" data-testid="projects-section">
+    <section id="projects" className="section-container section-alt" data-testid="projects-section">
       <div className="max-w-6xl mx-auto">
         <h2 className="section-title">Featured Projects</h2>
         <div className="projects-grid">
@@ -365,7 +364,7 @@ const ProjectsSection = () => {
   );
 };
 
-// Certifications Section
+// Certifications Section - Cyan/Blue theme matching portfolio
 const CertificationsSection = () => {
   return (
     <section id="certifications" className="section-container" data-testid="certifications-section">
@@ -375,24 +374,17 @@ const CertificationsSection = () => {
           {portfolioData.certifications.map((cert, index) => (
             <div key={index} className="certification-card" data-testid={`certification-card-${index}`}>
               <div className="cert-icon">
-                <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.75 5.25v6.25L21 9.5v5l-2.25-2v6.25a1.5 1.5 0 01-1.5 1.5H6.75a1.5 1.5 0 01-1.5-1.5V5.25a1.5 1.5 0 011.5-1.5h10.5a1.5 1.5 0 011.5 1.5zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"/>
+                <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
               </div>
               <div className="cert-content">
                 <h3 className="cert-name">{cert.name}</h3>
-                <p className="cert-provider">
-                  <span className="provider-badge">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm12.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L20.586 10l-2.293-2.293a1 1 0 010-1.414z"/>
-                    </svg>
-                    {cert.provider}
-                  </span>
-                </p>
+                <p className="cert-provider">{cert.provider}</p>
               </div>
               <div className="cert-badge">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
               </div>
             </div>
@@ -405,8 +397,25 @@ const CertificationsSection = () => {
 
 // Contact Section
 const ContactSection = () => {
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(portfolioData.resumeUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'SubashSekar_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      window.open(portfolioData.resumeUrl, '_blank');
+    }
+  };
+
   return (
-    <section id="contact" className="section-container section-dark" data-testid="contact-section">
+    <section id="contact" className="section-container section-alt" data-testid="contact-section">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="section-title">Get In Touch</h2>
         <p className="contact-intro">
@@ -450,17 +459,16 @@ const ContactSection = () => {
         
         {/* Download Resume CTA */}
         <div className="contact-resume-cta">
-          <a 
-            href={portfolioData.resumeUrl} 
-            download="SubashSekar_Resume.pdf"
+          <button 
+            onClick={handleDownload}
             className="btn-primary btn-large"
             data-testid="contact-download-resume"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
             Download My Resume
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -490,6 +498,16 @@ const Footer = () => {
 // Main App Component
 function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [isDark, setIsDark] = useState(true);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+  };
+
+  useEffect(() => {
+    document.body.classList.toggle('light-mode', !isDark);
+    document.body.classList.toggle('dark-mode', isDark);
+  }, [isDark]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -513,8 +531,8 @@ function App() {
   }, []);
 
   return (
-    <div className="App" data-testid="portfolio-app">
-      <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
+    <div className={`App ${isDark ? 'dark-mode' : 'light-mode'}`} data-testid="portfolio-app">
+      <Navigation activeSection={activeSection} setActiveSection={setActiveSection} isDark={isDark} toggleTheme={toggleTheme} />
       <HeroSection />
       <AboutSection />
       <ExperienceSection />
