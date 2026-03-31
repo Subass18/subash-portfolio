@@ -11,6 +11,8 @@ const portfolioData = {
   location: "Chennai, India",
   linkedin: "https://linkedin.com/in/subash-sekar-1609",
   github: "https://github.com/Subashsekar",
+  profileImage: "/profile.jpg",
+  resumeUrl: "/SubashSekar_Resume.pdf",
   about: `Python Full Stack Developer with hands-on experience in building scalable web applications using Django, FastAPI, and modern frontend technologies. Strong expertise in backend development, REST API design, Microservices architecture, and database-driven applications. Experience working with frontend technologies (HTML, CSS, JavaScript) to develop responsive and user-friendly interfaces. Skilled in integrating AI/LLM capabilities (OpenAI, Gemini, Claude, Llama) into full stack applications using RAG pipelines and intelligent APIs. Proficient in end-to-end application development, including authentication (JWT/OAuth2), system design, caching, and deployment using Docker.`,
   
   experience: [
@@ -40,11 +42,25 @@ const portfolioData = {
     }
   ],
   
+  certifications: [
+    {
+      name: "AWS Machine Learning Specialty",
+      provider: "Udemy",
+      icon: "aws"
+    },
+    {
+      name: "AWS Cloud Practitioner",
+      provider: "Udemy",
+      icon: "aws"
+    }
+  ],
+  
   skills: {
     "Programming Languages": ["Python", "JavaScript", "Java"],
-    "Frontend Development": ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    "Frontend Development": ["HTML5", "CSS3", "JavaScript", "Streamlit", "Responsive Design"],
     "Backend Development": ["Django", "Django REST Framework", "FastAPI", "REST APIs", "Microservices"],
     "AI / LLM Integration": ["OpenAI", "Gemini", "Claude", "Llama", "RAG", "LlamaIndex", "Qdrant", "Prompt Engineering"],
+    "AI Agents": ["LangChain Agents", "Agentic RAG", "Function Calling", "Single-Agent Systems"],
     "Databases": ["PostgreSQL", "MySQL", "MongoDB", "Supabase"],
     "Tools & DevOps": ["Docker", "Docker Compose", "Git", "GitHub", "Postman"],
     "Performance & System Design": ["Redis", "Celery", "Caching", "Task Queues", "API Gateway"],
@@ -92,7 +108,7 @@ const Navigation = ({ activeSection, setActiveSection }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = ['home', 'about', 'experience', 'skills', 'projects', 'contact'];
+  const navItems = ['home', 'about', 'experience', 'skills', 'projects', 'certifications', 'contact'];
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'nav-scrolled' : 'nav-transparent'}`}>
@@ -155,7 +171,7 @@ const Navigation = ({ activeSection, setActiveSection }) => {
   );
 };
 
-// Hero Section
+// Hero Section with Profile Image
 const HeroSection = () => {
   return (
     <section id="home" className="hero-section" data-testid="hero-section">
@@ -166,17 +182,35 @@ const HeroSection = () => {
       
       <div className="hero-content">
         <div className="hero-text-container">
-          <p className="hero-greeting animate-fade-in">Hello, I'm</p>
-          <h1 className="hero-name animate-fade-in-delay-1">{portfolioData.name}</h1>
-          <h2 className="hero-title animate-fade-in-delay-2">{portfolioData.title}</h2>
-          <p className="hero-subtitle animate-fade-in-delay-3">{portfolioData.subtitle}</p>
+          {/* Profile Image */}
+          <div className="hero-profile-image animate-fade-in">
+            <img 
+              src={portfolioData.profileImage} 
+              alt={portfolioData.name}
+              className="profile-img"
+              data-testid="profile-image"
+            />
+          </div>
           
-          <div className="hero-cta animate-fade-in-delay-4">
+          <p className="hero-greeting animate-fade-in-delay-1">Hello, I'm</p>
+          <h1 className="hero-name animate-fade-in-delay-2">{portfolioData.name}</h1>
+          <h2 className="hero-title animate-fade-in-delay-3">{portfolioData.title}</h2>
+          <p className="hero-subtitle animate-fade-in-delay-4">{portfolioData.subtitle}</p>
+          
+          <div className="hero-cta animate-fade-in-delay-5">
             <a href="#contact" className="btn-primary" data-testid="hero-contact-btn">
               Get In Touch
             </a>
-            <a href="#projects" className="btn-secondary" data-testid="hero-projects-btn">
-              View Projects
+            <a 
+              href={portfolioData.resumeUrl} 
+              download="SubashSekar_Resume.pdf"
+              className="btn-secondary btn-download" 
+              data-testid="download-resume-btn"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download Resume
             </a>
           </div>
           
@@ -331,10 +365,48 @@ const ProjectsSection = () => {
   );
 };
 
+// Certifications Section
+const CertificationsSection = () => {
+  return (
+    <section id="certifications" className="section-container" data-testid="certifications-section">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="section-title">Certifications</h2>
+        <div className="certifications-grid">
+          {portfolioData.certifications.map((cert, index) => (
+            <div key={index} className="certification-card" data-testid={`certification-card-${index}`}>
+              <div className="cert-icon">
+                <svg className="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.75 5.25v6.25L21 9.5v5l-2.25-2v6.25a1.5 1.5 0 01-1.5 1.5H6.75a1.5 1.5 0 01-1.5-1.5V5.25a1.5 1.5 0 011.5-1.5h10.5a1.5 1.5 0 011.5 1.5zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"/>
+                </svg>
+              </div>
+              <div className="cert-content">
+                <h3 className="cert-name">{cert.name}</h3>
+                <p className="cert-provider">
+                  <span className="provider-badge">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm12.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L20.586 10l-2.293-2.293a1 1 0 010-1.414z"/>
+                    </svg>
+                    {cert.provider}
+                  </span>
+                </p>
+              </div>
+              <div className="cert-badge">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // Contact Section
 const ContactSection = () => {
   return (
-    <section id="contact" className="section-container" data-testid="contact-section">
+    <section id="contact" className="section-container section-dark" data-testid="contact-section">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="section-title">Get In Touch</h2>
         <p className="contact-intro">
@@ -375,6 +447,21 @@ const ContactSection = () => {
             <span className="contact-value">View my code</span>
           </a>
         </div>
+        
+        {/* Download Resume CTA */}
+        <div className="contact-resume-cta">
+          <a 
+            href={portfolioData.resumeUrl} 
+            download="SubashSekar_Resume.pdf"
+            className="btn-primary btn-large"
+            data-testid="contact-download-resume"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Download My Resume
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -406,7 +493,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact'];
+      const sections = ['home', 'about', 'experience', 'skills', 'projects', 'certifications', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -433,6 +520,7 @@ function App() {
       <ExperienceSection />
       <SkillsSection />
       <ProjectsSection />
+      <CertificationsSection />
       <ContactSection />
       <Footer />
     </div>
