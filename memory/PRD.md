@@ -1,71 +1,71 @@
 # Subash Sekar Portfolio - PRD
 
 ## Original Problem Statement
-User requested to update their personal portfolio website based on their new resume. Key changes:
-- Update from Data Analyst role to Python Full Stack Developer
-- Remove Xortican from work experience
-- Add Conin Technologies Pvt Ltd as current employer
-- Update all contact information, skills, and projects from resume
+User requested to update their personal portfolio website based on their new resume with multiple enhancements for design and functionality.
 
 ## User Personas
-- **Primary**: Recruiters and hiring managers looking for Python Full Stack Developers
+- **Primary**: Recruiters and hiring managers looking for Python Full Stack / AI/LLM Developers
 - **Secondary**: Potential clients seeking development services
 - **Tertiary**: Professional network connections
 
 ## Core Requirements (Static)
-1. Modern, professional portfolio design
-2. Responsive navigation with smooth scrolling
-3. Hero section with name, title, profile image, and CTAs
-4. About section with professional summary
-5. Work Experience with current role at Conin Technologies
-6. Skills categorized by domain (Frontend, Backend, AI/LLM, AI Agents, etc.)
-7. Featured projects (Care AI, CRM)
-8. Certifications section
-9. Contact section with email, phone, LinkedIn, GitHub
-10. Downloadable resume
+1. Modern, professional portfolio design with dark/light mode
+2. Always horizontal navigation (no hamburger menu)
+3. Profile image in navigation that links to About section
+4. Hero section with dual role title
+5. About section with professional summary
+6. Work Experience with Conin Technologies
+7. Skills categorized including Cloud Services and AI Agents
+8. Featured projects (Care AI, CRM)
+9. Certifications section with cyan theme
+10. Contact section with all links
+11. Downloadable resume
 
 ## What's Been Implemented
 
 ### Initial Implementation - March 31, 2026
 - [x] Complete portfolio redesign with modern dark theme
 - [x] Updated personal info: Subash Sekar - Python Full Stack Developer
-- [x] New contact: subashsekar116@gmail.com, +91 8438420257
+- [x] Contact: subashsekar116@gmail.com, +91 8438420257
 - [x] Work experience: Conin Technologies Pvt Ltd (Jan 2024 - Present)
-- [x] Education: MBA from SRM Institute of Science and Technology
-- [x] 8 skill categories with 30+ technologies
-- [x] 2 featured projects: Care AI & CRM System
-- [x] Responsive design with mobile menu
-- [x] Smooth scroll navigation
-- [x] Social links (GitHub, LinkedIn, Email)
+- [x] Skills, projects, responsive design
 
-### Enhancement Update - March 31, 2026
-- [x] Profile image added to hero section with gradient border
-- [x] Download Resume button (hero + contact sections)
-- [x] Resume PDF available for download
-- [x] Certifications section with AWS credentials:
-  - AWS Machine Learning Specialty (Udemy)
-  - AWS Cloud Practitioner (Udemy)
-- [x] New skill category: AI Agents
-  - LangChain Agents
-  - Agentic RAG
-  - Function Calling
-  - Single-Agent Systems
-- [x] Streamlit added to Frontend Development skills
-- [x] Navigation updated to include Certifications
+### Enhancement Update 1 - March 31, 2026
+- [x] Profile image, Download Resume button, Certifications section
+- [x] AI Agents skill category, Streamlit in Frontend
+
+### Enhancement Update 2 - March 31, 2026
+- [x] **LinkedIn updated**: https://www.linkedin.com/in/subash-sekar-49509a21b/
+- [x] **Dual role title**: Python Full Stack Developer | AI/LLM Developer
+- [x] **Cloud Services skills**: AWS, GCP, Pub/Sub, SageMaker
+- [x] **Dark/Light mode toggle** with theme persistence
+- [x] **Profile image in navigation** (replaces SS logo, clicks to About)
+- [x] **Always horizontal navigation** (no hamburger menu on any screen)
+- [x] **Cyan certifications** (removed orange color)
+- [x] **Fixed resume download** using fetch/blob approach
+- [x] All 12 tests passed (100% success rate)
 
 ## Tech Stack
 - React.js (Frontend)
-- CSS3 with custom variables
-- Responsive design with Tailwind utilities
+- CSS3 with CSS Variables for theming
+- Responsive design
+
+## Current Features Summary
+- **Navigation**: Profile image + 7 horizontal links + theme toggle
+- **Hero**: Name, dual role, subtitle, CTA buttons, social links
+- **About**: Professional summary, contact info grid
+- **Experience**: Conin Technologies role with highlights
+- **Education**: MBA from SRM Institute
+- **Skills**: 10 categories (Programming, Frontend, Backend, AI/LLM, AI Agents, Cloud, Databases, DevOps, Performance, Testing)
+- **Projects**: Care AI Healthcare Platform, CRM Lead Management
+- **Certifications**: AWS ML Specialty, AWS Cloud Practitioner (Udemy)
+- **Contact**: Email, Phone, LinkedIn, GitHub + Download Resume
+- **Themes**: Dark mode (default) + Light mode
 
 ## Prioritized Backlog
 
-### P0 (Critical) - COMPLETED
-- [x] Update all personal information from resume
-- [x] Replace Xortican with Conin Technologies
-- [x] Add profile image
-- [x] Add downloadable resume
-- [x] Add certifications
+### P0 (Critical) - ALL COMPLETED
+- [x] All user requested features implemented
 
 ### P1 (High Priority)
 - [ ] SEO optimization (meta tags, Open Graph)
@@ -75,14 +75,13 @@ User requested to update their personal portfolio website based on their new res
 - [ ] Add contact form with email integration
 - [ ] Add blog/articles section
 - [ ] Add testimonials section
-- [ ] Dark/Light theme toggle
 
 ### P3 (Low Priority/Future)
-- [ ] Add animations on scroll (AOS library)
+- [ ] Add animations on scroll
 - [ ] Multi-language support
 - [ ] Analytics integration
 
 ## Next Tasks
-1. Consider adding a contact form for direct inquiries
+1. Update GitHub Pages with this new version
 2. Add more certifications as earned
 3. Update projects section with new work
