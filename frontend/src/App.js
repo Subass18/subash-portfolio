@@ -165,23 +165,6 @@ const Navigation = ({ activeSection, setActiveSection, isDark, toggleTheme }) =>
 
 // Hero Section - No profile image here since it's in nav
 const HeroSection = () => {
-  const handleDownload = async () => {
-    try {
-      const response = await fetch(portfolioData.resumeUrl);
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'SubashSekar_Resume.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      // Fallback: open in new tab
-      window.open(portfolioData.resumeUrl, '_blank');
-    }
-  };
 
   return (
     <section id="home" className="hero-section" data-testid="hero-section">
@@ -201,16 +184,19 @@ const HeroSection = () => {
             <a href="#contact" className="btn-primary" data-testid="hero-contact-btn">
               Get In Touch
             </a>
-            <button 
-              onClick={handleDownload}
+            <a 
+              href={portfolioData.resumeUrl}
+              download="SubashSekar_Resume.pdf"
               className="btn-secondary btn-download" 
               data-testid="download-resume-btn"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
               Download Resume
-            </button>
+            </a>
           </div>
           
           <div className="hero-social animate-fade-in-delay-5">
@@ -397,23 +383,6 @@ const CertificationsSection = () => {
 
 // Contact Section
 const ContactSection = () => {
-  const handleDownload = async () => {
-    try {
-      const response = await fetch(portfolioData.resumeUrl);
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'SubashSekar_Resume.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      window.open(portfolioData.resumeUrl, '_blank');
-    }
-  };
-
   return (
     <section id="contact" className="section-container section-alt" data-testid="contact-section">
       <div className="max-w-4xl mx-auto text-center">
@@ -459,16 +428,19 @@ const ContactSection = () => {
         
         {/* Download Resume CTA */}
         <div className="contact-resume-cta">
-          <button 
-            onClick={handleDownload}
+          <a 
+            href={portfolioData.resumeUrl}
+            download="SubashSekar_Resume.pdf"
             className="btn-primary btn-large"
             data-testid="contact-download-resume"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
             Download My Resume
-          </button>
+          </a>
         </div>
       </div>
     </section>
